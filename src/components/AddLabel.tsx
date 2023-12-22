@@ -30,7 +30,7 @@ export default function AddLabel() {
   return (
     <Popover>
       <PopoverTrigger>
-        <MoreVertical className="h-5 w-5 cursor-pointer text-gray-400 transition hover:text-gray-700" />
+        <MoreVertical className="h-5 w-5 cursor-pointer text-muted-foreground transition hover:text-primary" />
       </PopoverTrigger>
       <PopoverContent>
         <ul className="grid grid-cols-4 gap-2">
