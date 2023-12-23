@@ -19,7 +19,7 @@ export default function FilterEmails() {
       value={selected}
       onValueChange={(value: string) => setSelected(value)}
     >
-      <SelectTrigger className="h-7 w-24 rounded-full text-xs font-semibold text-gray-500">
+      <SelectTrigger className="h-7 w-24 rounded-full text-xs font-semibold text-muted-foreground">
         <SelectValue placeholder="Select a filter" />
       </SelectTrigger>
       <SelectContent>

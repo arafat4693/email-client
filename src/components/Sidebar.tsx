@@ -71,7 +71,7 @@ const labels = [
 
 export default function Sidebar() {
   return (
-    <ScrollArea className="relative w-[17rem] border-0 border-r border-solid border-input bg-gray-100/50">
+    <ScrollArea className="relative w-[17rem] border-0 border-r border-solid border-input bg-slate-100/50 dark:bg-slate-900/50">
       <aside className="min-h-screen">
         <div className="border-0 border-b border-solid border-input py-6 pl-5">
           <Logo />

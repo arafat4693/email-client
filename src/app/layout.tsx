@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { TRPCReactProvider } from "@/trpc/react";
 
 import { cn } from "@/lib/utils";
+import ThemeProvider from "@/components/theme-provider";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -32,7 +33,14 @@ export default function RootLayout({
         )}
       >
         <TRPCReactProvider cookies={cookies().toString()}>
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </TRPCReactProvider>
       </body>
     </html>

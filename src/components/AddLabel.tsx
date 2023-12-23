@@ -53,7 +53,7 @@ export default function AddLabel() {
         </ul>
 
         <div className="mb-2 mt-4 space-y-2">
-          <Label htmlFor="label" className="text-gray-600">
+          <Label htmlFor="label" className="text-muted-foreground">
             Label
           </Label>
           <Input
