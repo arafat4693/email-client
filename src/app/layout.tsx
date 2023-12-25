@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/theme-provider";
+import { EdgeStoreProvider } from "../lib/edgestore";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </ThemeProvider>
         </TRPCReactProvider>
       </body>

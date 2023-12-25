@@ -10,16 +10,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function UserButton() {
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
+export default async function UserButton() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <figure className="flex items-center gap-2 rounded-full border border-solid border-input p-1.5">
+        <figure className="flex items-center gap-2 rounded-full border border-solid border-input p-1">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={user?.picture ?? undefined} alt="user" />
+            <AvatarFallback>
+              {user?.given_name?.[0]}
+              {user?.family_name?.[0]}
+            </AvatarFallback>
           </Avatar>
-          <h1 className="text-base font-semibold text-primary">Kieth Serge</h1>
+          <h1 className="text-base font-semibold text-primary">
+            {user?.given_name} {user?.family_name}
+          </h1>
           <ChevronDown className="h-4 w-4 text-primary" />
         </figure>
       </DropdownMenuTrigger>
@@ -29,7 +40,10 @@ export default function UserButton() {
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Billing</DropdownMenuItem>
         <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="text-red-500 ">
+          <LogoutLink>Logout</LogoutLink>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
