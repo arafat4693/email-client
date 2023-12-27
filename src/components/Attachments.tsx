@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Paperclip } from "lucide-react";
+import { FileCheck, Paperclip, Plus, Trash2 } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "./ui/button";
 import { FileState, MultiFileDropzone } from "./MultiFileDropzone";
@@ -22,13 +22,32 @@ export default function Attachments() {
 
   return (
     <>
-      <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-primary">
-        <Paperclip className="h-3.5 w-3.5" />
-        Attachments
-      </p>
-      <Button size="sm" onClick={() => setOpen(true)} variant="secondary">
-        Add Attachment
-      </Button>
+      <div className="mb-2 flex items-center gap-2 ">
+        <p className="flex items-center gap-1.5 text-sm font-semibold text-primary">
+          <Paperclip className="h-3.5 w-3.5" />
+          Attachments
+        </p>
+        <Button size="xs" onClick={() => setOpen(true)} variant="secondary">
+          <Plus className="h-4 w-4" />
+        </Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-5 rounded-md border-2 border-solid border-input p-1.5">
+          <p className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+            <FileCheck className="h-4 w-4" />
+            Brand.pdf
+          </p>
+          <Trash2 className="h-3 w-3 cursor-pointer text-destructive" />
+        </div>
+
+        <div className="flex items-center gap-5 rounded-md border-2 border-solid border-input p-1.5">
+          <p className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+            <FileCheck className="h-4 w-4" />
+            Brand.pdf
+          </p>
+          <Trash2 className="h-3 w-3 cursor-pointer text-destructive" />
+        </div>
+      </div>
       <Attachments.Modal open={open} setOpen={setOpen} />
     </>
   );

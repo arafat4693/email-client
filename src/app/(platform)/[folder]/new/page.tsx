@@ -1,17 +1,20 @@
+import AddedMailAddress from "@/components/AddedMailAddress";
 import Attachments from "@/components/Attachments";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   createKindeManagementAPIClient,
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+import { X } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const Editor = dynamic(() => import("@/components/Editor"), { ssr: false });
 
 export default async function page() {
   const apiClient = await createKindeManagementAPIClient();
-  const users = await apiClient.usersApi.getUsers();
+  const allUsers = await apiClient.usersApi.getUsers();
 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -20,8 +23,8 @@ export default async function page() {
 
   return (
     <section className="px-4 py-3">
-      <div className="flex items-center justify-between">
-        <h3 className="mb-5 text-lg font-semibold text-primary">New mail</h3>
+      <div className="mb-5 flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-primary">New mail</h3>
 
         <div className="flex gap-2">
           <Button size="sm" variant="destructive">
@@ -35,7 +38,7 @@ export default async function page() {
 
       <p className="mb-2 text-sm font-semibold text-muted-foreground">From</p>
 
-      <figure className="mb-5 flex items-center gap-2">
+      <figure className="mb-6 flex items-center gap-2">
         <Avatar className="h-7 w-7">
           <AvatarImage src={user?.picture ?? undefined} alt="user" />
           <AvatarFallback>
@@ -49,9 +52,22 @@ export default async function page() {
         </h1>
       </figure>
 
-      <p className="mb-2 text-sm font-semibold text-muted-foreground">To</p>
+      <AddedMailAddress
+        allUsers={allUsers.users?.map((u) => ({
+          id: u.id,
+          firstName: u.firstName,
+          lastName: u.lastName,
+          picture: u.picture,
+          email: u.email,
+        }))}
+      />
 
-      <div className="max-w-[calc(100vw-45rem)] overflow-hidden rounded-md border border-solid border-input pb-3">
+      <Input
+        type="text"
+        placeholder="Subject"
+        className="mb-3.5 h-0 border-0 px-0.5 text-base placeholder:text-base placeholder:font-medium focus-visible:ring-0 focus-visible:ring-offset-0"
+      />
+      <div className="mb-6 max-w-[calc(100vw-45rem)] overflow-hidden rounded-md border border-solid border-input pb-3">
         <div className="mb-3 flex h-8 items-center bg-secondary px-4 text-sm font-semibold text-muted-foreground/70">
           Type Here
         </div>
